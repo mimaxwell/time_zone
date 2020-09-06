@@ -64,3 +64,12 @@ class ZoneTimeOffset(generics.ListAPIView):
         results = ZoneTimeOffsetSerializer(time_zone_name, many=True).data
         return results
 
+# this doesn't have a serializer yet
+# endpoint "works" but returns wrong thing
+class ZoneTimeCountries(views.APIView):
+    def get(self, request):
+        utctime = [{"time": datetime.datetime.utcnow()}]
+        results = UTCSerializer(utctime, many=True).data
+        return Response(results)
+
+
