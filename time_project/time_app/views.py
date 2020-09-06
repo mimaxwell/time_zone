@@ -2,7 +2,7 @@
 from rest_framework import views, generics
 from rest_framework.response import Response
 
-from .serializers import UnixSerializer, UTCSerializer, ZoneTimeSerializer, ZoneTimeNameSerializer, ZoneTimeOffsetSerializer
+from .serializers import UnixSerializer, UTCSerializer, ZoneTimeSerializer, ZoneTimeNameSerializer, ZoneTimeOffsetSerializer, ZoneTimeCountriesSerializer
 from .models import TimeZone
 import time
 import datetime
@@ -66,10 +66,15 @@ class ZoneTimeOffset(generics.ListAPIView):
 
 # this doesn't have a serializer yet
 # endpoint "works" but returns wrong thing
-class ZoneTimeCountries(views.APIView):
-    def get(self, request):
-        utctime = [{"time": datetime.datetime.utcnow()}]
-        results = UTCSerializer(utctime, many=True).data
-        return Response(results)
+class ZoneTimeCountries(generics.ListAPIView):
+    serializer_class = ZoneTimeCountriesSerializer
 
+    def get_queryset(self):
+        name = self.kwargs['name']
+    
+        # #utctime = [{"time": datetime.datetime.utcnow()}]
+        #countries = TimeZone.objects.filter(name=name).values_list('description')
+        # description = [{"description": }]
+        # results = ZoneTimeCountriesSerializer(countries, many=True).data
+        return TimeZone.objects.filter(name=name)
 

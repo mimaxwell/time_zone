@@ -12,7 +12,6 @@ class ZoneTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeZone
         fields = ('name', 'description','utc_offset')
-        #fields = ('utc_offset',)
 
 class ZoneTimeNameSerializer(serializers.Serializer):
     time = serializers.DateTimeField()
@@ -21,5 +20,5 @@ class ZoneTimeOffsetSerializer(serializers.Serializer):
     time_zone_name = serializers.CharField() 
 
 
-# class ZoneTimrCountriesSerializer(serializers.Serializer):
-# countries = serializers.CharField()
+class ZoneTimeCountriesSerializer(serializers.Serializer):
+    description = serializers.CharField()
