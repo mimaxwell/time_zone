@@ -21,4 +21,4 @@ class ZoneTimeOffsetSerializer(serializers.Serializer):
 
 
 class ZoneTimeCountriesSerializer(serializers.Serializer):
-    country = serializers.CharField()
+    countries = serializers.CharField()

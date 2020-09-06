@@ -9,6 +9,7 @@ import datetime
 import pytz
 
 import requests
+import json 
 
 # Create your views here.
 class UnixTime(views.APIView):
@@ -74,7 +75,9 @@ class ZoneTimeCountries(views.APIView):
     def get(self, request, name):
        # name = self.kwargs['name']
         response = requests.get('https://restcountries.eu/rest/v2/all')
-        print(response)
+        parsed = json.loads(response.text)
+
+       # print(response.content)
         # this will return a lot
         # want to parse through
 
@@ -82,7 +85,7 @@ class ZoneTimeCountries(views.APIView):
         # then will need to filter by offset
         # so from the three digit code get the associated offset
         # if that offset matches return the country name
-        var = [{"country": response}]
+        var = [{"countries": parsed}]
         results = ZoneTimeCountriesSerializer(var, many=True).data
         
         return Response(results)
