@@ -1,0 +1,6 @@
+to build the docker container: docker build -t time_service:<tag> .
+to run the docker container: docker run -p 8000:8000 -it -v ~/time_service:/src time_service:<tag>
+to run the server: python3 manage.py runserver 0.0.0.0:8000
+access docker container after server is already running:
+docker run  -it -v ~/time_service:/src time_service:<tag>
+to access the api in browser: applepi:8000
