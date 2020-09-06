@@ -8,6 +8,8 @@ import time
 import datetime
 import pytz
 
+import requests
+
 # Create your views here.
 class UnixTime(views.APIView):
     
@@ -66,15 +68,22 @@ class ZoneTimeOffset(generics.ListAPIView):
 
 # this doesn't have a serializer yet
 # endpoint "works" but returns wrong thing
-class ZoneTimeCountries(generics.ListAPIView):
-    serializer_class = ZoneTimeCountriesSerializer
+class ZoneTimeCountries(views.APIView):
+    #serializer_class = ZoneTimeCountriesSerializer
 
-    def get_queryset(self):
-        name = self.kwargs['name']
-    
-        # #utctime = [{"time": datetime.datetime.utcnow()}]
-        #countries = TimeZone.objects.filter(name=name).values_list('description')
-        # description = [{"description": }]
-        # results = ZoneTimeCountriesSerializer(countries, many=True).data
-        return TimeZone.objects.filter(name=name)
+    def get(self, request, name):
+       # name = self.kwargs['name']
+        response = requests.get('https://restcountries.eu/rest/v2/all')
+        print(response)
+        # this will return a lot
+        # want to parse through
+
+        # begin just by returning all country names and their timezones
+        # then will need to filter by offset
+        # so from the three digit code get the associated offset
+        # if that offset matches return the country name
+        var = [{"country": response}]
+        results = ZoneTimeCountriesSerializer(var, many=True).data
+        
+        return Response(results)
 
