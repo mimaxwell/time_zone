@@ -10,6 +10,7 @@ import pytz
 
 import requests
 import json 
+import sys
 
 # Create your views here.
 class UnixTime(views.APIView):
@@ -38,6 +39,8 @@ class ZoneTimeDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ZoneTimeSerializer
 
 # gets specific row where the timezone name is a url parameter
+# ex: /time/zone/EAT
+# returns time but not offset
 class ZoneTimeName(generics.ListAPIView):
     serializer_class = ZoneTimeNameSerializer
     def get_queryset(self):
@@ -55,6 +58,8 @@ class ZoneTimeName(generics.ListAPIView):
         results = ZoneTimeNameSerializer(time, many=True).data
         return results
 
+# returns timezone name when given an offset
+# ex: /time/zone/+7 returns "time_zone_name": "VST"
 class ZoneTimeOffset(generics.ListAPIView):
     serializer_class = ZoneTimeOffsetSerializer
     
@@ -67,21 +72,31 @@ class ZoneTimeOffset(generics.ListAPIView):
         results = ZoneTimeOffsetSerializer(time_zone_name, many=True).data
         return results
 
+# TODO this is unfinished while I work on an endpoint that 
+# returns the offset from the name
 # this doesn't have a serializer yet
 # endpoint "works" but returns wrong thing
 class ZoneTimeCountries(views.APIView):
+    # TODO explain this 
+    sys.stdout.reconfigure(encoding='utf-8')
     #serializer_class = ZoneTimeCountriesSerializer
 
     def get(self, request, name):
-       # name = self.kwargs['name']
+        # ge tthe utc offset associated with name
+        # do I have logic to do that already?
+        # how to I utilize it? making an api call 
+        # to my own service would be silly 
+
         response = requests.get('https://restcountries.eu/rest/v2/all')
+        
         parsed = json.loads(response.text)
-
-       # print(response.content)
-        # this will return a lot
-        # want to parse through
-
+    
         # begin just by returning all country names and their timezones
+        #iterate through the entries
+        for entry in range(len(parsed)):
+            print(parsed[entry]["name"])
+            print(parsed[entry]["timezones"])
+        
         # then will need to filter by offset
         # so from the three digit code get the associated offset
         # if that offset matches return the country name
