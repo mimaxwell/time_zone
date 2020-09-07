@@ -84,14 +84,22 @@ class ZoneTimeCountries(views.APIView):
 
     def get(self, request, name):
         # ge tthe utc offset associated with name
-        # do I have logic to do that already?
-        # how to I utilize it? making an api call 
-        # to my own service would be silly 
+        # some serious repetetion of self
+        #query = "GMT" + offset + ":00"
+        offset_queryset = TimeZone.objects.filter(name=name).values_list('utc_offset')
+        # offset is in the form of <QuerySet [('GMT-3:00',)]>
+        # only need it to be -3:00
+        offset_gmt = ''.join(list(offset_queryset)[0])
+        offset_utc = offset_gmt.replace('GMT', 'UTC') # now in format UTC-3:00
 
-        response = requests.get('https://restcountries.eu/rest/v2/all')
-        
+        response = requests.get('https://restcountries.eu/rest/v2/all')        
         parsed = json.loads(response.text)
     
+        # NEXT STEPS: now that I have the offset use that to find the country 
+        # names where [entry]["timezones"] has an element that == offset_utc
+        # collect those names in a list. return that list
+
+
         # begin just by returning all country names and their timezones
         #iterate through the entries
         for entry in range(len(parsed)):
