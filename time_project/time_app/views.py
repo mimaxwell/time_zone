@@ -2,7 +2,7 @@
 from rest_framework import views, generics
 from rest_framework.response import Response
 
-from .serializers import UnixSerializer, UTCSerializer, ZoneTimeSerializer, ZoneTimeNameSerializer, ZoneTimeOffsetSerializer, ZoneTimeCountriesSerializer
+from .serializers import UnixSerializer, UTCSerializer, ZoneTimeSerializer, ZoneTimeNameSerializer, ZoneTimeOffsetSerializer, ZoneTimeNameOffsetSerializer, ZoneTimeCountriesSerializer
 from .models import TimeZone
 import time
 import datetime
@@ -72,6 +72,7 @@ class ZoneTimeOffset(generics.ListAPIView):
         results = ZoneTimeOffsetSerializer(time_zone_name, many=True).data
         return results
 
+
 # TODO this is unfinished while I work on an endpoint that 
 # returns the offset from the name
 # this doesn't have a serializer yet
@@ -104,4 +105,17 @@ class ZoneTimeCountries(views.APIView):
         results = ZoneTimeCountriesSerializer(var, many=True).data
         
         return Response(results)
+
+
+# from time zone name retunrs offset form utc
+# example: /time/zone/VST/offset returns [{"offset": "GMT+7:00"}]
+class ZoneTimeNameOffset(generics.ListAPIView):
+    serializer_class = ZoneTimeNameOffsetSerializer
+
+    def get_queryset(self):
+        name = self.kwargs["name"]
+        offset = TimeZone.objects.filter(name=name).values_list('utc_offset')
+        offset_value = [{"offset": ''.join(list(offset)[0])}]
+        results = ZoneTimeNameOffsetSerializer(offset_value, many=True).data
+        return results
 

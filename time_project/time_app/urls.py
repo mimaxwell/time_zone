@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import UnixTime, UTCTime, ZoneTime, ZoneTimeDetail, ZoneTimeName, ZoneTimeOffset, ZoneTimeCountries
+from .views import UnixTime, UTCTime, ZoneTime, ZoneTimeDetail, ZoneTimeName, ZoneTimeOffset, ZoneTimeCountries, ZoneTimeNameOffset
 
 urlpatterns = [
     path('unix/', UnixTime.as_view()),
@@ -7,7 +7,8 @@ urlpatterns = [
     path('zone/',  ZoneTime.as_view()),
     path('zone/<int:pk>/', ZoneTimeDetail.as_view()),   
     re_path(r'^zone/(?P<name>[A-Z]{3})/countries', ZoneTimeCountries.as_view()), 
-    re_path(r'^zone/(?P<name>[A-Z]{3})/$', ZoneTimeName.as_view()),
+    re_path(r'^zone/(?P<name>[A-Z]{3})/offset', ZoneTimeNameOffset.as_view()),
+    re_path(r'^zone/(?P<name>[A-Z]{3})/', ZoneTimeName.as_view()),
     re_path(r'^zone/(?P<offset>(\+|\-)(10|11|[0-9]))', ZoneTimeOffset.as_view()),
     
 ]
