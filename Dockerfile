@@ -1,8 +1,9 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+
 RUN apt-get update -y &&  apt-get install -y\
-    python3.7 \
-    python3-pip 
- # maybe want to install vim and tmux? 
+#     python3.7.0 \
+     python3-pip 
+ 
 
 
 WORKDIR /src
