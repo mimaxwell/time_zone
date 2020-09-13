@@ -50,17 +50,11 @@ class ZoneTimeName(generics.ListAPIView):
 
         # A whole bunch of nasty type conversion
         utc = TimeZone.objects.filter(name=name).values_list('utc_offset')
-        #print(gmt) 
         listutc = list(utc) #convert from query set to list
-        #print(listgmt)
         stringutc = ''.join(listutc[0]) #convert from list to string
         gmt = stringutc.replace('UTC', 'GMT')
-        #print(stringgmt)
         colon_location = gmt.find(":")
-        #print(colon_location) # 6
         utcoffset_temp = gmt[0:colon_location]
-        #print(utcoffset_temp.index('0',0,5)) #GMT-03
-
         
         try: # throws value error if a 0 is not at index 4
             if (utcoffset_temp.index('0',0,5) == 4):
