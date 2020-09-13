@@ -72,14 +72,14 @@ class ZoneTimeName(generics.ListAPIView):
         return results
 
 # returns timezone name when given an offset
-# ex: /time/zone/+7 returns "time_zone_name": "VST"
+# ex: /time/zone/+07 returns "time_zone_name": "VST"
+# +7 or -1 will not work
 class ZoneTimeOffset(generics.ListAPIView):
     serializer_class = ZoneTimeOffsetSerializer
-    
-    #print(queryset)
     def get_queryset(self):
         offset = self.kwargs['offset']
-        query = "GMT" + offset + ":00"
+        print(offset)
+        query = "UTC" + offset + ":00"
         name = TimeZone.objects.filter(utc_offset=query).values_list('name')
         time_zone_name = [{"time_zone_name": ''.join(list(name)[0])}]
         results = ZoneTimeOffsetSerializer(time_zone_name, many=True).data
