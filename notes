@@ -4,3 +4,24 @@ to run the server: python3 manage.py runserver 0.0.0.0:8000
 access docker container after server is already running:
 docker run  -it -v ~/time_service:/src time_service:<tag>
 to access the api in browser: applepi:8000
+
+how to upload the timezone.csv file to the database
+exec in to the docker container
+navigate to folder that has the manage.py file
+know the location of the timezone.csv file
+go in to the django shell using python3 manage.py shell
+
+import csv
+import os
+
+from time_app.models import TimeZone
+with open('time_app/timezone.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        p = TimeZone(name=row['name'], description=row['description'], utc_offset=row['utc_offset'])
+        p.save()            
+
+exit()
+
+adapted from https://abhishekchhibber.com/django-importing-a-csv-file-to-database-models/
+
