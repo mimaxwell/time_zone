@@ -1,32 +1,32 @@
 name,description,utc_offset
-ECT,European Central Time,GMT+01:00
-EET,Eastern European Time,GMT+02:00
-ART,(Arabic) Egypt Standard Time,GMT+02:00
-EAT,Eastern African Time,GMT+03:00
-MET,Middle East Time,GMT+03:30
-NET,Near East Time,GMT+04:00
-PLT,Pakistan Lahore Time,GMT+05:00
-IST,India Standard Time,GMT+05:30
-BST,Bangladesh Standard Time,GMT+06:00
-VST,Vietnam Standard Time,GMT+07:00
-CTT,China Taiwan Time,GMT+08:00
-JST,Japan Standard Time,GMT+09:00
-ACT,Australia Central Time,GMT+09:30
-AET,Australia Eastern Time,GMT+10:00
-SST,Solomon Standard Time,GMT+11:00
-NST,New Zealand Standard Time,GMT+12:00
-MIT,Midway Islands Time,GMT-11:00
-HST,Hawaii Standard Time,GMT-10:00
-AST,Alaska Standard Time,GMT-09:00
-PST,Pacific Standard Time,GMT-08:00
-PNT,Phoenix Standard Time,GMT-07:00
-MST,Mountain Standard Time,GMT-07:00
-CST,Central Standard Time,GMT-06:00
-EST,Eastern Standard Time,GMT-05:00
-IET,Indiana Eastern Standard Time,GMT-05:00
-PRT,Puerto Rico and US Virgin Islands Time,GMT-04:00
-CNT,Canada Newfoundland Time,GMT-03:30
-AGT,Argentina Standard Time,GMT-03:00
-BET,Brazil Eastern Time,GMT-03:00
-CAT,Central African Time,GMT-01:00
+ECT,European Central Time,UTC+01:00
+EET,Eastern European Time,UTC+02:00
+ART,(Arabic) Egypt Standard Time,UTC+02:00
+EAT,Eastern African Time,UTC+03:00
+MET,Middle East Time,UTC+03:30
+NET,Near East Time,UTC+04:00
+PLT,Pakistan Lahore Time,UTC+05:00
+IST,India Standard Time,UTC+05:30
+BST,Bangladesh Standard Time,UTC+06:00
+VST,Vietnam Standard Time,UTC+07:00
+CTT,China Taiwan Time,UTC+08:00
+JST,Japan Standard Time,UTC+09:00
+ACT,Australia Central Time,UTC+09:30
+AET,Australia Eastern Time,UTC+10:00
+SST,Solomon Standard Time,UTC+11:00
+NST,New Zealand Standard Time,UTC+12:00
+MIT,Midway Islands Time,UTC-11:00
+HST,Hawaii Standard Time,UTC-10:00
+AST,Alaska Standard Time,UTC-09:00
+PST,Pacific Standard Time,UTC-08:00
+PNT,Phoenix Standard Time,UTC-07:00
+MST,Mountain Standard Time,UTC-07:00
+CST,Central Standard Time,UTC-06:00
+EST,Eastern Standard Time,UTC-05:00
+IET,Indiana Eastern Standard Time,UTC-05:00
+PRT,Puerto Rico and US Virgin Islands Time,UTC-04:00
+CNT,Canada Newfoundland Time,UTC-03:30
+AGT,Argentina Standard Time,UTC-03:00
+BET,Brazil Eastern Time,UTC-03:00
+CAT,Central African Time,UTC-01:00
 
